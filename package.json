@@ -10,12 +10,23 @@
     "test": "jest"
   },
   "codegenConfig": {
-    "name": "NativeLocalStorageSpec",
     "type": "modules",
-    "jsSrcsDir": "specs",
-    "android": {
-      "javaPackageName": "com.nativelocalstorage"
-    }
+    "modules": [
+      {
+        "name": "NativeLocalStorageSpec",
+        "jsSrcsDir": "specs",
+        "android": {
+          "javaPackageName": "com.nativelocalstorage"
+        }
+      },
+      {
+        "name": "NativeBatterySpec",
+        "jsSrcsDir": "specs",
+        "android": {
+          "javaPackageName": "com.nativebattery"
+        }
+      }
+    ]
   },
   "dependencies": {
     "react": "18.3.1",
