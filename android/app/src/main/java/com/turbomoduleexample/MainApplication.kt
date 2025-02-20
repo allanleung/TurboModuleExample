@@ -1,7 +1,5 @@
 package com.turbomoduleexample
 
-// import com.nativelocalstorage.NativeBatteryPackage
-// import com.nativelocalstorage.NativeLocalStoragePackage
 import android.app.Application
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
@@ -23,15 +21,12 @@ class MainApplication : Application(), ReactApplication {
                     PackageList(this).packages.apply {
                       // Packages that cannot be autolinked yet can be added manually here, for
                       // example:
-                      // add(MyReactNativePackage())
                       // add(NativeLocalStoragePackage())
                       add(NativeBatteryInfoPackage())
                     }
 
             override fun getJSMainModuleName(): String = "index"
-
             override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
-
             override val isNewArchEnabled: Boolean = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED
             override val isHermesEnabled: Boolean = BuildConfig.IS_HERMES_ENABLED
           }
