@@ -71,27 +71,4 @@ class NativeBatteryInfoModule(private val reactContext: ReactApplicationContext)
             promise.reject("ERROR", "Could not get battery voltage", e)
         }
     }
-
-    override fun getBatteryChargeCycle(promise: Promise) {
-        try {
-            // There is no standard public API for battery charge cycle.
-            // On some devices this might be exposed via a sysfs file.
-            // We'll attempt to read it; if unavailable, return -1.
-            val cycleCount =
-                    try {
-                        val file = java.io.File("/sys/class/power_supply/battery/cycle_count")
-                        if (file.exists()) {
-                            val text = file.readText().trim()
-                            text.toIntOrNull() ?: -1
-                        } else {
-                            -1
-                        }
-                    } catch (ex: Exception) {
-                        -1
-                    }
-            promise.resolve(cycleCount)
-        } catch (e: Exception) {
-            promise.reject("ERROR", "Could not get battery charge cycle", e)
-        }
-    }
 }

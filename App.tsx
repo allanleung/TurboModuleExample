@@ -7,7 +7,6 @@ const App = () => {
   const [batteryHealth, setBatteryHealth] = useState<number | null>(null);
   const [batteryCapacity, setBatteryCapacity] = useState<number | null>(null);
   const [batteryVoltage, setBatteryVoltage] = useState<number | null>(null);
-  const [batteryCycle, setBatteryCycle] = useState<number | null>(null);
 
   const fetchBatteryData = async () => {
     try {
@@ -15,13 +14,11 @@ const App = () => {
       const health = await NativeBatteryInfo.getBatteryHealth();
       const capacity = await NativeBatteryInfo.getBatteryCapacity();
       const voltage = await NativeBatteryInfo.getBatteryChargeVoltage();
-      const cycle = await NativeBatteryInfo.getBatteryChargeCycle();
 
       setBatteryLevel(level);
       setBatteryHealth(health);
       setBatteryCapacity(capacity);
       setBatteryVoltage(voltage);
-      setBatteryCycle(cycle);
     } catch (error) {
       console.error('Error fetching battery data:', error);
     }
@@ -51,10 +48,6 @@ const App = () => {
         <Text style={styles.contentText}>
           Battery Voltage:{' '}
           {batteryVoltage !== null ? `${batteryVoltage} mV` : 'N/A'}
-        </Text>
-        <Text style={styles.contentText}>
-          Battery Charge Cycle:{' '}
-          {batteryCycle !== null && batteryCycle !== -1 ? batteryCycle : 'N/A'}
         </Text>
       </ScrollView>
     </SafeAreaView>

@@ -6,7 +6,6 @@ export interface Spec extends TurboModule {
   getBatteryHealth(): Promise<number>;
   getBatteryCapacity(): Promise<number>;
   getBatteryChargeVoltage(): Promise<number>;
-  getBatteryChargeCycle(): Promise<number>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('NativeBatteryInfo');
