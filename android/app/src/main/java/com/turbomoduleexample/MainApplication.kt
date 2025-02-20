@@ -1,6 +1,7 @@
 package com.turbomoduleexample
 
 // import com.nativelocalstorage.NativeBatteryPackage
+// import com.nativelocalstorage.NativeLocalStoragePackage
 import android.app.Application
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
@@ -12,7 +13,7 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
-import com.nativelocalstorage.NativeLocalStoragePackage
+import com.nativebatteryinfo.NativeBatteryInfoPackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -23,8 +24,8 @@ class MainApplication : Application(), ReactApplication {
                       // Packages that cannot be autolinked yet can be added manually here, for
                       // example:
                       // add(MyReactNativePackage())
-                      add(NativeLocalStoragePackage())
-                      // add(NativeBatteryPackage())
+                      // add(NativeLocalStoragePackage())
+                      add(NativeBatteryInfoPackage())
                     }
 
             override fun getJSMainModuleName(): String = "index"

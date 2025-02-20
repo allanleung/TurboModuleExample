@@ -1,65 +1,62 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Text, TextInput, Button} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import NativeBatteryInfo from './specs/NativeBatteryInfo';
 
-import NativeLocalStorage from './specs/NativeLocalStorage';
+const App = () => {
+  const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
 
-const EMPTY = '<empty>';
+  // Fetch battery level from the native module.
+  const fetchBatteryLevel = async () => {
+    try {
+      const level = await NativeBatteryInfo.getBatteryLevel();
+      setBatteryLevel(level);
+    } catch (error) {
+      console.error('Error fetching battery level:', error);
+    }
+  };
 
-function App(): React.JSX.Element {
-  const [value, setValue] = React.useState<string | null>(null);
-
-  const [editingValue, setEditingValue] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    const storedValue = NativeLocalStorage?.getItem('myKey');
-    setValue(storedValue ?? '');
+  // Poll battery level every 5 seconds to simulate real-time updates.
+  useEffect(() => {
+    fetchBatteryLevel();
+    const intervalId = setInterval(fetchBatteryLevel, 5000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  function saveValue() {
-    NativeLocalStorage?.setItem(editingValue ?? EMPTY, 'myKey');
-    setValue(editingValue);
-  }
-
-  function clearAll() {
-    NativeLocalStorage?.clear();
-    setValue('');
-  }
-
-  function deleteValue() {
-    NativeLocalStorage?.removeItem('myKey');
-    setValue('');
-  }
-
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Text style={styles.text}>
-        Current stored value is: {value ?? 'No Value'}
-      </Text>
-      <TextInput
-        placeholder="Enter the text you want to store"
-        style={styles.textInput}
-        onChangeText={setEditingValue}
-      />
-      <Button title="Save" onPress={saveValue} />
-      <Button title="Delete" onPress={deleteValue} />
-      <Button title="Clear" onPress={clearAll} />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>
+          Battery: {batteryLevel !== null ? `${batteryLevel}%` : 'N/A'}
+        </Text>
+      </View>
+      <View style={styles.content}>
+        <Text style={styles.contentText}>Main app content goes here.</Text>
+      </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  text: {
-    margin: 10,
-    fontSize: 20,
+  container: {
+    flex: 1,
   },
-  textInput: {
-    margin: 10,
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1,
-    paddingLeft: 5,
-    paddingRight: 5,
-    borderRadius: 5,
+  header: {
+    padding: 16,
+    backgroundColor: '#f1f1f1',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contentText: {
+    fontSize: 16,
   },
 });
 

@@ -7,14 +7,15 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "codegen": "cd android && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema && cd .."
   },
   "codegenConfig": {
-    "name": "NativeLocalStorageSpec",
+    "name": "NativeBatteryInfoSpec",
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {
-      "javaPackageName": "com.nativelocalstorage"
+      "javaPackageName": "com.nativebatteryinfo"
     }
   },
   "dependencies": {
