@@ -1,24 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, ScrollView} from 'react-native';
 import NativeBatteryInfo from './specs/NativeBatteryInfo';
 
 const App = () => {
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
+  const [batteryHealth, setBatteryHealth] = useState<number | null>(null);
+  const [batteryCapacity, setBatteryCapacity] = useState<number | null>(null);
+  const [batteryVoltage, setBatteryVoltage] = useState<number | null>(null);
+  const [batteryCycle, setBatteryCycle] = useState<number | null>(null);
 
-  // Fetch battery level from the native module.
-  const fetchBatteryLevel = async () => {
+  const fetchBatteryData = async () => {
     try {
       const level = await NativeBatteryInfo.getBatteryLevel();
+      const health = await NativeBatteryInfo.getBatteryHealth();
+      const capacity = await NativeBatteryInfo.getBatteryCapacity();
+      const voltage = await NativeBatteryInfo.getBatteryChargeVoltage();
+      const cycle = await NativeBatteryInfo.getBatteryChargeCycle();
+
       setBatteryLevel(level);
+      setBatteryHealth(health);
+      setBatteryCapacity(capacity);
+      setBatteryVoltage(voltage);
+      setBatteryCycle(cycle);
     } catch (error) {
-      console.error('Error fetching battery level:', error);
+      console.error('Error fetching battery data:', error);
     }
   };
 
-  // Poll battery level every 5 seconds to simulate real-time updates.
   useEffect(() => {
-    fetchBatteryLevel();
-    const intervalId = setInterval(fetchBatteryLevel, 5000);
+    fetchBatteryData();
+    const intervalId = setInterval(fetchBatteryData, 5000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -26,12 +37,26 @@ const App = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>
-          Battery: {batteryLevel !== null ? `${batteryLevel}%` : 'N/A'}
+          Battery Level: {batteryLevel !== null ? `${batteryLevel}%` : 'N/A'}
         </Text>
       </View>
-      <View style={styles.content}>
-        <Text style={styles.contentText}>Main app content goes here.</Text>
-      </View>
+      <ScrollView style={styles.content}>
+        <Text style={styles.contentText}>
+          Battery Health: {batteryHealth !== null ? batteryHealth : 'N/A'}
+        </Text>
+        <Text style={styles.contentText}>
+          Battery Capacity:{' '}
+          {batteryCapacity !== null ? `${batteryCapacity} mAh` : 'N/A'}
+        </Text>
+        <Text style={styles.contentText}>
+          Battery Voltage:{' '}
+          {batteryVoltage !== null ? `${batteryVoltage} mV` : 'N/A'}
+        </Text>
+        <Text style={styles.contentText}>
+          Battery Charge Cycle:{' '}
+          {batteryCycle !== null && batteryCycle !== -1 ? batteryCycle : 'N/A'}
+        </Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -52,11 +77,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16,
   },
   contentText: {
     fontSize: 16,
+    marginBottom: 8,
   },
 });
 
