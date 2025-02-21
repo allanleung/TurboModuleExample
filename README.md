@@ -1,4 +1,4 @@
-# Android Battery Info TurboModule
+# Android / iOS Battery Info TurboModule
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli). In addition to the standard React Native setup, this project includes a custom Android TurboModule that exposes native battery information to JavaScript. The module provides the following API:
 
