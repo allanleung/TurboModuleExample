@@ -8,7 +8,9 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "codegen": "cd android && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema && cd .."
+    "codegen": "cd android && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
+    "clear-cache": "watchman watch-del-all && rm -rf node_modules/.cache/metro && rm -rf node_modules package-lock.json yarn.lock && npm install && npx expo start --clear",
+    "clean-build": "rm -rf android/app/build ios/build && cd android && ./gradlew clean && cd .. && npx expo start --clear"
   },
   "codegenConfig": {
     "name": "NativeBatteryInfoSpec",
