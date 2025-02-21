@@ -119,6 +119,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				E721D7E32D68F7BA00263D99 /* NativeBatteryInfo */,
 				13B07FAE1A68108700A75B9A /* TurboModuleExample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TurboModuleExampleTests */,
@@ -149,6 +150,13 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-TurboModuleExample-TurboModuleExampleTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E721D7E32D68F7BA00263D99 /* NativeBatteryInfo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NativeBatteryInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -472,7 +480,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TurboModuleExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -499,7 +507,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = TurboModuleExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
