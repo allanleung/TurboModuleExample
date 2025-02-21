@@ -10,7 +10,8 @@
     "test": "jest",
     "codegen": "cd android && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
     "clear-cache": "watchman watch-del-all && rm -rf node_modules/.cache/metro && rm -rf node_modules package-lock.json yarn.lock && npm install",
-    "clean-build": "rm -rf android/app/build ios/build && cd android && ./gradlew clean && cd .."
+    "clean-build": "rm -rf android/app/build ios/build && cd android && ./gradlew clean && cd ..",
+    "pod": "cd ios && bundle install && bundle exec pod install && cd.."
   },
   "codegenConfig": {
     "name": "NativeBatteryInfoSpec",

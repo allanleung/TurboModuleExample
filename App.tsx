@@ -11,9 +11,12 @@ const App = () => {
   const fetchBatteryData = async () => {
     try {
       const level = await NativeBatteryInfo.getBatteryLevel();
-      const health = await NativeBatteryInfo.getBatteryHealth();
-      const capacity = await NativeBatteryInfo.getBatteryCapacity();
-      const voltage = await NativeBatteryInfo.getBatteryChargeVoltage();
+      // Optional functions: if undefined, default to null.
+      // Apple Battery API does not have Health, capacity or voltage
+      const health = (await NativeBatteryInfo.getBatteryHealth?.()) ?? null;
+      const capacity = (await NativeBatteryInfo.getBatteryCapacity?.()) ?? null;
+      const voltage =
+        (await NativeBatteryInfo.getBatteryChargeVoltage?.()) ?? null;
 
       setBatteryLevel(level);
       setBatteryHealth(health);
