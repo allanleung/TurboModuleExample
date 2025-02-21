@@ -5,13 +5,15 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator=\"iPhone 15\"",
+    "ios:clean-install": "cd ios && rm -rf Pods Podfile.lock && pod install --verbose && cd ..",
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "test": "jest",
     "codegen": "cd android && ./gradlew clean && ./gradlew generateCodegenArtifactsFromSchema && cd ..",
     "clear-cache": "watchman watch-del-all && rm -rf node_modules/.cache/metro && rm -rf node_modules package-lock.json yarn.lock && npm install",
     "clean-build": "rm -rf android/app/build ios/build && cd android && ./gradlew clean && cd ..",
-    "pod": "cd ios && bundle install && bundle exec pod install && cd.."
+    "pod": "cd ios && bundle install && bundle exec pod install && cd..",
+    "full:reset": "rm -rf node_modules && npm install && cd ios && rm -rf Pods && pod install && cd .."
   },
   "codegenConfig": {
     "name": "NativeBatteryInfoSpec",
