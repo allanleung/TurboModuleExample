@@ -1,9 +1,24 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Android Battery Info TurboModule
+
+This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli). In addition to the standard React Native setup, this project includes a custom Android TurboModule that exposes native battery information to JavaScript. The module provides the following API:
+
+- **getBatteryLevel()**: Returns the current battery level as a percentage.
+- **getBatteryHealth()**: Returns the battery health status.
+- **getBatteryCapacity()**: Returns the battery capacity in mAh.
+- **getBatteryChargeVoltage()**: Returns the battery charge voltage in millivolts.
+
+> **Note**: This native module is implemented in Android native code and requires a bare React Native project (or a custom dev client) – it will not work in an Expo managed workflow.
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions up to "Creating a new application" before proceeding.
 
+## Step 1: Generate Native Code Bindings
+
+This project uses codegen to generate the native bindings for the TurboModule. Ensure your `package.json` codegen configuration is correct, then run:
+
+````bash
+npm run codegen
 ## Step 1: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
@@ -16,7 +31,7 @@ npm start
 
 # OR using Yarn
 yarn start
-```
+````
 
 ## Step 2: Start your Application
 
